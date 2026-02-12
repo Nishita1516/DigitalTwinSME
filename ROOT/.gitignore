@@ -1,0 +1,92 @@
+######################################
+# Python / Data Science
+######################################
+__pycache__/
+*.py[cod]
+*.so
+*.pyd
+*.pyo
+*.egg
+*.egg-info/
+dist/
+build/
+*.egg-info/
+
+# Virtual environments
+venv/
+env/
+.venv/
+.env/
+torch_env/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Python tooling
+.mypy_cache/
+.pytest_cache/
+.ruff_cache/
+.hypothesis/
+
+######################################
+# IDE / Editor
+######################################
+.vscode/
+.idea/
+.history/
+*.code-workspace
+
+######################################
+# OS / System
+######################################
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+.DS_Store
+
+######################################
+# Logs / Temp / Cache
+######################################
+*.log
+logs/
+tmp/
+temp/
+*.tmp
+
+######################################
+# Data & model artifacts
+######################################
+*.csv
+*.tsv
+*.parquet
+*.h5
+*.hdf5
+*.npz
+*.npy
+*.pkl
+*.joblib
+
+# Model weights / checkpoints
+*.pt
+*.pth
+*.ckpt
+checkpoints/
+models/
+
+######################################
+# Streamlit
+######################################
+.streamlit/secrets.toml
+.streamlit/config.toml
+.streamlit/cache/
+.streamlit/static/
+
+######################################
+# Local config / secrets
+######################################
+.env.local
+.env.*.local
+*.env
+*.ini
+*.cfg
