@@ -36,7 +36,7 @@ def load_synthetic_data() -> pd.DataFrame:
     Looks for the CSV in the project root alongside this package.
     """
     project_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-    csv_path = os.path.join(project_root, "FD001_Synthetic_Digital_Twin_Dataset.csv")
+    csv_path = os.path.join(project_root, "DATA", "FD001_Synthetic_Digital_Twin_Dataset.csv")
     df = pd.read_csv(csv_path)
     return df
 

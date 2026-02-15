@@ -8,6 +8,7 @@ import pandas as pd
 import torch
 import streamlit as st
 import numpy as np
+import joblib
 
 # Ensure project root is on Python path so package imports work when
 # running `streamlit run DASHBOARD/app.py`
@@ -24,6 +25,7 @@ from DIGITAL_TWIN.config import SEQ_LEN
 
 from MODELS.predict_rul import load_model, predict_rul
 from MODELS.shap_explainer import get_shap_explainer, explain_prediction
+from MODELS.nlp_baseline import MaintenanceLogClassifier 
 
 
 # ======================================
@@ -42,6 +44,7 @@ page_title()
 # Load Data
 # ======================================
 test_df = load_synthetic_data()
+log_df = pd.read_csv(os.path.join(ROOT_DIR, "DATA", "maintenance_logs.csv"))
 
 sensor_cols = [col for col in test_df.columns if col.startswith("s")]
 input_size = len(sensor_cols)
@@ -55,6 +58,13 @@ def initialize_model_and_explainer():
     model = load_model(input_size)
     
     # Create sequences for background SHAP data
+    
+    # Load NLP Model
+    nlp_model_path = os.path.join(ROOT_DIR, "MODELS", "nlp_baseline.pkl")
+    if os.path.exists(nlp_model_path):
+        nlp_model = joblib.load(nlp_model_path)
+    else:
+        nlp_model = None
 
     X_all, _ = create_sliding_windows(
         test_df,
@@ -66,10 +76,10 @@ def initialize_model_and_explainer():
 
     explainer = get_shap_explainer(model, background_data)
 
-    return model, explainer
+    return model, explainer, nlp_model
 
 
-model, explainer = initialize_model_and_explainer()
+model, explainer, nlp_model = initialize_model_and_explainer()
 
 
 # ======================================
@@ -180,3 +190,44 @@ section_header("Top Contributing Sensors")
 for item in dashboard_data:
     st.markdown(f"### Engine {item['engine_id']}")
     st.table(pd.DataFrame(item['top_contributing_sensors']))
+
+
+# ======================================
+# NLP / Maintenance Logs Integration
+# ======================================
+section_header("Maintenance Log Analysis")
+
+# Get logs for the engine IDs currently displayed
+relevant_logs = log_df[log_df["engine_id"].isin([d["engine_id"] for d in dashboard_data])].copy()
+
+if not relevant_logs.empty and nlp_model is not None:
+    # Predict using the loaded pipeline
+    # The pipeline expects a list/series of text
+    predictions = nlp_model.predict(relevant_logs["log_text"])
+    relevant_logs["Predicted Fault"] = predictions
+    
+    # Predict probabilities for confidence
+    probs = nlp_model.predict_proba(relevant_logs["log_text"])
+    confidence = np.max(probs, axis=1)
+    relevant_logs["Confidence"] = confidence
+
+    # Display per engine
+    for item in dashboard_data:
+        eid = item['engine_id']
+        st.markdown(f"#### Engine {eid} Logs")
+        
+        engine_logs = relevant_logs[relevant_logs["engine_id"] == eid].sort_values("timestamp", ascending=False)
+        
+        if engine_logs.empty:
+            st.info("No maintenance logs found for this engine.")
+        else:
+            # Display readable table
+            display_cols = ["timestamp", "log_text", "Predicted Fault", "Confidence", "severity"]
+            st.dataframe(
+                engine_logs[display_cols].style.format({"Confidence": "{:.2%}"})
+            )
+
+elif nlp_model is None:
+    st.warning("NLP Model not found. Please train the model using `python ROOT/train_nlp.py`.")
+else:
+    st.info("No logs found for the selected engines.")
