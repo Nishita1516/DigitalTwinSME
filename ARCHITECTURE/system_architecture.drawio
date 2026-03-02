@@ -1,0 +1,190 @@
+<mxfile host="65bd71144e">
+    <diagram name="Digital Twin Architecture" id="digital-twin-arch">
+        <mxGraphModel dx="1035" dy="325" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
+            <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+                <mxCell id="arrow5-users" value="" style="endArrow=classic;html=1;exitX=0.5;exitY=1;strokeWidth=2;" parent="1" source="streamlit" edge="1">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="790" y="929.5" as="sourcePoint"/>
+                        <mxPoint x="722" y="1110" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="6" value="" style="group" vertex="1" connectable="0" parent="1">
+                    <mxGeometry x="585" y="1110" width="560" height="78" as="geometry"/>
+                </mxCell>
+                <mxCell id="end-users-bg" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff9e6;strokeColor=#ff9900;opacity=30;" parent="6" vertex="1">
+                    <mxGeometry width="560" height="78" as="geometry"/>
+                </mxCell>
+                <mxCell id="end-users" value="👥 End Users: Factory Supervisors, Maintenance Engineers, Machine Operators" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=14;fontStyle=1" parent="6" vertex="1">
+                    <mxGeometry x="20" y="19.5" width="520" height="39" as="geometry"/>
+                </mxCell>
+                <mxCell id="layer2-title" value="Layer 2: Digital Twin Simulation" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=14;fontStyle=1" parent="1" vertex="1">
+                    <mxGeometry x="700" y="330" width="250" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="historical" value="Historical Data Store&#xa;Past failures, patterns&#xa;for model training" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" parent="1" vertex="1">
+                    <mxGeometry x="1220" y="370" width="200" height="50" as="geometry"/>
+                </mxCell>
+                <mxCell id="state-mirror" value="Real-time State Mirror&#xa;Current sensor readings&#xa;mirrored in digital space" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" parent="1" vertex="1">
+                    <mxGeometry x="980" y="370" width="200" height="50" as="geometry"/>
+                </mxCell>
+                <mxCell id="virtual-machine" value="Virtual Machine Model&#xa;Sliding Window Sequences&#xa;Time-series Features" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" parent="1" vertex="1">
+                    <mxGeometry x="740" y="370" width="200" height="50" as="geometry"/>
+                </mxCell>
+                <mxCell id="arrow2-3b" value="" style="endArrow=classic;html=1;exitX=0.5;exitY=1;strokeWidth=2;entryX=0.26;entryY=-0.011;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" source="state-mirror" target="layer3-bg" edge="1">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="1320" y="430" as="sourcePoint"/>
+                        <mxPoint x="970" y="470" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="arrow2-3" value="" style="endArrow=classic;html=1;exitX=0.5;exitY=1;entryX=0.259;entryY=-0.023;strokeWidth=2;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" source="virtual-machine" target="layer3-bg" edge="1">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="1080" y="430" as="sourcePoint"/>
+                        <mxPoint x="1130" y="380" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="title" value="AI-Driven Digital Twin Platform for Predictive Maintenance" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=20;fontStyle=1" parent="1" vertex="1">
+                    <mxGeometry x="830" y="80" width="680" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="arrow1-2b" value="" style="endArrow=classic;html=1;exitX=0.5;exitY=1;entryX=0.25;entryY=0;strokeWidth=2;entryDx=0;entryDy=0;" parent="1" source="maint-logs" target="layer2-bg" edge="1">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="1290" y="290" as="sourcePoint"/>
+                        <mxPoint x="1340" y="240" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="layer2-bg" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;opacity=30;" parent="1" vertex="1">
+                    <mxGeometry x="580" y="330" width="1200" height="100" as="geometry"/>
+                </mxCell>
+                <mxCell id="arrow3-4" value="" style="endArrow=classic;html=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0;strokeWidth=2;" parent="1" source="lstm-model" target="layer4-bg" edge="1">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="1055" y="610" as="sourcePoint"/>
+                        <mxPoint x="1105" y="560" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="arrow3-4b" value="" style="endArrow=classic;html=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0;strokeWidth=2;" parent="1" source="predictions" target="layer4-bg" edge="1">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="1775" y="610" as="sourcePoint"/>
+                        <mxPoint x="1825" y="560" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="annotation-opensource" value="✓ Open-source stack&#xa;✓ Low cost&#xa;✓ SME-friendly" style="text;html=1;strokeColor=#82b366;fillColor=#d5e8d4;align=left;verticalAlign=top;whiteSpace=wrap;rounded=1;fontSize=11;" parent="1" vertex="1">
+                    <mxGeometry x="1740" y="345" width="140" height="70" as="geometry"/>
+                </mxCell>
+                <mxCell id="annotation-explainable" value="✓ Explainable AI&#xa;✓ Human-centric&#xa;✓ Builds trust" style="text;html=1;strokeColor=#666666;fillColor=#f5f5f5;align=left;verticalAlign=top;whiteSpace=wrap;rounded=1;fontSize=11;" parent="1" vertex="1">
+                    <mxGeometry x="1754" y="730" width="140" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="2" value="" style="group" vertex="1" connectable="0" parent="1">
+                    <mxGeometry x="863.85" y="790" width="1080" height="266" as="geometry"/>
+                </mxCell>
+                <mxCell id="7" value="" style="group" vertex="1" connectable="0" parent="2">
+                    <mxGeometry x="-280" y="110" width="1190" height="156" as="geometry"/>
+                </mxCell>
+                <mxCell id="layer5-bg" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e3f2fd;strokeColor=#0d47a1;opacity=30;" parent="7" vertex="1">
+                    <mxGeometry width="1190" height="156" as="geometry"/>
+                </mxCell>
+                <mxCell id="layer5-title" value="Layer 5: Visualization Dashboard" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=14;fontStyle=1" parent="7" vertex="1">
+                    <mxGeometry x="10.625" y="6.5" width="318.75" height="39" as="geometry"/>
+                </mxCell>
+                <mxCell id="streamlit" value="Streamlit Web App&#xa;(app.py)&#xa;Real-time monitoring interface" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#bbdefb;strokeColor=#0d47a1;fontStyle=1" parent="7" vertex="1">
+                    <mxGeometry x="42.5" y="58.49999999999999" width="191.25" height="78" as="geometry"/>
+                </mxCell>
+                <mxCell id="rul-display" value="RUL Predictions&#xa;Bar charts&#xa;Remaining life per engine" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#bbdefb;strokeColor=#0d47a1;" parent="7" vertex="1">
+                    <mxGeometry x="265.625" y="58.49999999999999" width="170" height="78" as="geometry"/>
+                </mxCell>
+                <mxCell id="sensor-importance" value="Top Contributing Sensors&#xa;SHAP importance values&#xa;ranked table" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#bbdefb;strokeColor=#0d47a1;" parent="7" vertex="1">
+                    <mxGeometry x="467.5" y="58.49999999999999" width="191.25" height="78" as="geometry"/>
+                </mxCell>
+                <mxCell id="log-analysis" value="Maintenance Log Analysis&#xa;Fault predictions&#xa;Confidence scores" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#bbdefb;strokeColor=#0d47a1;" parent="7" vertex="1">
+                    <mxGeometry x="690.625" y="58.49999999999999" width="191.25" height="78" as="geometry"/>
+                </mxCell>
+                <mxCell id="alerts" value="Alerts &amp; Actions&#xa;⚠️ Urgent maintenance&#xa;✅ Healthy machines" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#bbdefb;strokeColor=#0d47a1;" parent="7" vertex="1">
+                    <mxGeometry x="913.75" y="58.49999999999999" width="170" height="78" as="geometry"/>
+                </mxCell>
+                <mxCell id="10" value="" style="group" vertex="1" connectable="0" parent="1">
+                    <mxGeometry x="580" y="680" width="1200" height="160" as="geometry"/>
+                </mxCell>
+                <mxCell id="layer4-bg" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;opacity=30;" parent="10" vertex="1">
+                    <mxGeometry width="1200" height="160" as="geometry"/>
+                </mxCell>
+                <mxCell id="layer4-title" value="Layer 4: Explainability (XAI)" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=14;fontStyle=1" parent="10" vertex="1">
+                    <mxGeometry x="11.11111111111111" y="7.272727272727273" width="277.77777777777777" height="43.63636363636364" as="geometry"/>
+                </mxCell>
+                <mxCell id="shap" value="SHAP DeepExplainer&#xa;(shap_explainer.py)&#xa;Feature importance&#xa;Top contributing sensors" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontStyle=1" parent="10" vertex="1">
+                    <mxGeometry x="177.77777777777777" y="58.18181818181819" width="222.22222222222226" height="72.72727272727273" as="geometry"/>
+                </mxCell>
+                <mxCell id="human-readable" value="Human-Readable Insights&#xa;&quot;Sensor-7 (Bearing Vibration)&#xa;contributed +40% to failure risk&quot;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;" parent="10" vertex="1">
+                    <mxGeometry x="444.4444444444445" y="58.18181818181819" width="266.6666666666667" height="72.72727272727273" as="geometry"/>
+                </mxCell>
+                <mxCell id="trust" value="Trust &amp; Transparency&#xa;Operators understand WHY&#xa;the system made predictions" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;" parent="10" vertex="1">
+                    <mxGeometry x="755.5555555555557" y="58.18181818181819" width="222.22222222222226" height="72.72727272727273" as="geometry"/>
+                </mxCell>
+                <mxCell id="11" value="" style="group" vertex="1" connectable="0" parent="1">
+                    <mxGeometry x="580" y="480" width="1200" height="140" as="geometry"/>
+                </mxCell>
+                <mxCell id="layer3-bg" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;opacity=30;" parent="11" vertex="1">
+                    <mxGeometry width="1200" height="140" as="geometry"/>
+                </mxCell>
+                <mxCell id="layer3-title" value="Layer 3: ML &amp; NLP Processing" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=14;fontStyle=1" parent="11" vertex="1">
+                    <mxGeometry x="11.111111111111114" y="5" width="277.7777777777778" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="lstm-model" value="LSTM Model&#xa;(lstm_model.py)&#xa;RUL Prediction&#xa;RMSE: 16.79" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontStyle=1" parent="11" vertex="1">
+                    <mxGeometry x="44.44444444444446" y="45" width="166.6666666666667" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="rf-model" value="Random Forest&#xa;(classical_models)&#xa;Baseline Model&#xa;RMSE: 50.56" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" parent="11" vertex="1">
+                    <mxGeometry x="244.44444444444449" y="45" width="166.6666666666667" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="gb-model" value="Gradient Boosting&#xa;(classical_models)&#xa;Alternative Model" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" parent="11" vertex="1">
+                    <mxGeometry x="444.4444444444445" y="45" width="166.6666666666667" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="nlp-model" value="NLP Model&#xa;(nlp_baseline.py)&#xa;TF-IDF + LogReg&#xa;Accuracy: 100%" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontStyle=1" parent="11" vertex="1">
+                    <mxGeometry x="644.4444444444445" y="45" width="166.6666666666667" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="predictions" value="Predictions&#xa;(predict_rul.py)&#xa;RUL values&#xa;Fault classifications" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;" parent="11" vertex="1">
+                    <mxGeometry x="844.4444444444445" y="45" width="166.6666666666667" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="12" value="" style="group" vertex="1" connectable="0" parent="1">
+                    <mxGeometry x="580" y="170" width="1200" height="100" as="geometry"/>
+                </mxCell>
+                <mxCell id="layer1-bg" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;opacity=30;" parent="12" vertex="1">
+                    <mxGeometry width="1200" height="100" as="geometry"/>
+                </mxCell>
+                <mxCell id="layer1-title" value="Layer 1: Data Ingestion" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=14;fontStyle=1" parent="12" vertex="1">
+                    <mxGeometry x="11.11111111111111" y="5" width="222.2222222222222" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="sensor-data" value="Sensor Data&#xa;(C-MAPSS)&#xa;Temperature, Vibration,&#xa;Pressure, Speed" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" parent="12" vertex="1">
+                    <mxGeometry x="44.44444444444444" y="30" width="199.99999999999997" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="maint-logs" value="Maintenance Logs&#xa;Text records from&#xa;operators &amp; mechanics" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" parent="12" vertex="1">
+                    <mxGeometry x="288.88888888888886" y="30" width="199.99999999999997" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="data-loader" value="Data Loader&#xa;(data_loader.py)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;" parent="12" vertex="1">
+                    <mxGeometry x="533.3333333333334" y="30" width="199.99999999999997" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="preprocessing" value="Preprocessing&#xa;(preprocessing.py)&#xa;Normalization, RUL Calc" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;" parent="12" vertex="1">
+                    <mxGeometry x="777.7777777777777" y="30" width="199.99999999999997" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="data-prep" value="Data Preparation&#xa;(twin_data_prep.py)&#xa;Windowing, Scaling" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;" parent="12" vertex="1">
+                    <mxGeometry x="1022.2222222222221" y="30" width="166.66666666666666" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="arrow4-5" value="" style="endArrow=classic;html=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0;strokeWidth=2;" parent="1" source="shap" target="layer5-bg" edge="1">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="940.2592592592594" y="825.4545454545455" as="sourcePoint"/>
+                        <mxPoint x="991.462962962963" y="752.7272727272727" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="arrow4-5b" value="" style="endArrow=classic;html=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0;strokeWidth=2;" parent="1" source="human-readable" target="layer5-bg" edge="1">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="1206.5185185185187" y="825.4545454545455" as="sourcePoint"/>
+                        <mxPoint x="1257.7222222222222" y="752.7272727272727" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="arrow1-2" value="" style="endArrow=classic;html=1;exitX=0.5;exitY=1;strokeWidth=2;entryX=0.25;entryY=0;entryDx=0;entryDy=0;" parent="1" source="sensor-data" target="layer2-bg" edge="1">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="1070" y="290" as="sourcePoint"/>
+                        <mxPoint x="940" y="320" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
+</mxfile>

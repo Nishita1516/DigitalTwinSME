@@ -90,3 +90,13 @@ models/
 *.env
 *.ini
 *.cfg
+
+# DIRECTORY
+ARCHITECTURE/
+debug_imports/
+diagnose/
+Digital Twin Dashboard pdf/
+dataset_justification/
+dashboard_ui/
+system_architecture/
+user_workflow/
