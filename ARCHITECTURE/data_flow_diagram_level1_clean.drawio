@@ -1,0 +1,88 @@
+<mxfile host="65bd71144e">
+    <diagram id="dfd-l1-clean" name="DFD Level 1 (Clean)">
+        <mxGraphModel dx="942" dy="411" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1800" pageHeight="1000" math="0" shadow="0">
+            <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+                <mxCell id="title" value="&lt;b&gt;Data Flow Diagram - Level 1&lt;/b&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontSize=18;fontStyle=1;" parent="1" vertex="1">
+                    <mxGeometry x="680" y="20" width="440" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="e1" value="&lt;b&gt;E1&lt;/b&gt;&lt;br/&gt;NASA C-MAPSS" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" parent="1" vertex="1">
+                    <mxGeometry x="40" y="130" width="170" height="70" as="geometry"/>
+                </mxCell>
+                <mxCell id="e2" value="&lt;b&gt;E2&lt;/b&gt;&lt;br/&gt;Maintenance Engineer" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" parent="1" vertex="1">
+                    <mxGeometry x="1560" y="430" width="190" height="70" as="geometry"/>
+                </mxCell>
+                <mxCell id="d1" value="&lt;b&gt;D1&lt;/b&gt;&lt;br/&gt;Raw Sensor Data" style="shape=datastore;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" parent="1" vertex="1">
+                    <mxGeometry x="260" y="120" width="220" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="d2" value="&lt;b&gt;D2&lt;/b&gt;&lt;br/&gt;Maintenance Logs" style="shape=datastore;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" parent="1" vertex="1">
+                    <mxGeometry x="260" y="620" width="220" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="d3" value="&lt;b&gt;D3&lt;/b&gt;&lt;br/&gt;Trained Models" style="shape=datastore;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" parent="1" vertex="1">
+                    <mxGeometry x="1180" y="120" width="220" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="d4" value="&lt;b&gt;D4&lt;/b&gt;&lt;br/&gt;Evaluation Results" style="shape=datastore;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" parent="1" vertex="1">
+                    <mxGeometry x="1180" y="620" width="220" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="p1" value="&lt;b&gt;P1.0&lt;/b&gt;&lt;br/&gt;Sensor Preprocessing" style="ellipse;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;" parent="1" vertex="1">
+                    <mxGeometry x="560" y="120" width="260" height="90" as="geometry"/>
+                </mxCell>
+                <mxCell id="p2" value="&lt;b&gt;P2.0&lt;/b&gt;&lt;br/&gt;RUL Modeling (LSTM/RF/GB)" style="ellipse;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" parent="1" vertex="1">
+                    <mxGeometry x="860" y="120" width="280" height="90" as="geometry"/>
+                </mxCell>
+                <mxCell id="p3" value="&lt;b&gt;P3.0&lt;/b&gt;&lt;br/&gt;NLP Classification (TF-IDF+LR)" style="ellipse;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" parent="1" vertex="1">
+                    <mxGeometry x="560" y="620" width="300" height="90" as="geometry"/>
+                </mxCell>
+                <mxCell id="p4" value="&lt;b&gt;P4.0&lt;/b&gt;&lt;br/&gt;Dashboard &amp; Alerts" style="ellipse;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" parent="1" vertex="1">
+                    <mxGeometry x="860" y="380" width="280" height="100" as="geometry"/>
+                </mxCell>
+                <mxCell id="p5" value="&lt;b&gt;P5.0&lt;/b&gt;&lt;br/&gt;Evaluation &amp; Reports" style="ellipse;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" parent="1" vertex="1">
+                    <mxGeometry x="860" y="620" width="280" height="90" as="geometry"/>
+                </mxCell>
+                <mxCell id="f1" value="FD001 files" style="endArrow=classic;html=1;strokeWidth=2;" parent="1" source="e1" target="d1" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="f2" value="sensor data" style="endArrow=classic;html=1;strokeWidth=2;" parent="1" source="d1" target="p1" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="f3" value="prepared windows/targets" style="endArrow=classic;html=1;strokeWidth=2;" parent="1" source="p1" target="p2" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="f4" value="trained RUL models" style="endArrow=classic;html=1;strokeWidth=2;" parent="1" source="p2" target="d3" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="f5" value="RUL predictions" style="endArrow=classic;html=1;strokeWidth=2;" parent="1" source="p2" target="p4" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="f6" value="maintenance logs" style="endArrow=classic;html=1;strokeWidth=2;" parent="1" source="d2" target="p3" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="f7" value="trained NLP model" style="endArrow=classic;html=1;strokeWidth=2;" parent="1" source="p3" target="d3" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="f8" value="fault + confidence" style="endArrow=classic;html=1;strokeWidth=2;" parent="1" source="p3" target="p4" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="f9" value="models for inference" style="endArrow=classic;html=1;strokeWidth=2;dashed=1;exitX=0.398;exitY=0.97;exitDx=0;exitDy=0;exitPerimeter=0;" parent="1" source="d3" target="p4" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="f10" value="dashboard outputs" style="endArrow=classic;html=1;strokeWidth=2;" parent="1" source="p4" target="e2" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="f11" value="RUL metrics" style="endArrow=classic;html=1;strokeWidth=2;" parent="1" source="p2" target="p5" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="f12" value="NLP metrics" style="endArrow=classic;html=1;strokeWidth=2;" parent="1" source="p3" target="p5" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="f13" value="reports / CSV" style="endArrow=classic;html=1;strokeWidth=2;" parent="1" source="p5" target="d4" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="f14" value="evaluation summary" style="endArrow=classic;html=1;strokeWidth=2;" parent="1" source="d4" target="e2" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
+</mxfile>

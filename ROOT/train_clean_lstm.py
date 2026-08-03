@@ -88,11 +88,14 @@ def main() -> None:
 
     experiment_dir = ROOT_DIR / "MODELS" / "experiments" / args.experiment_name
     if experiment_dir.exists():
-        raise FileExistsError(
-            f"Experiment already exists: {experiment_dir}. "
-            "Choose a new --experiment-name; this script never overwrites artifacts."
-        )
-    experiment_dir.mkdir(parents=True)
+        if any(experiment_dir.iterdir()):
+            raise FileExistsError(
+                f"Experiment already contains artifacts: {experiment_dir}. "
+                "Choose a new --experiment-name; this script never overwrites artifacts."
+            )
+        print(f"Reusing empty experiment directory: {experiment_dir}", flush=True)
+    else:
+        experiment_dir.mkdir(parents=True)
 
     set_seed(args.seed)
     data_path = ROOT_DIR / "DATA" / "Sensor Data" / (
