@@ -44,18 +44,19 @@ def set_seed(seed: int) -> None:
 def standardise_from_training(train_df, *other_dfs):
     """Fit one scaler on training engines only, then transform every split."""
     scaler = StandardScaler()
-    train_df = train_df.copy()
+    feature_dtypes = {column: "float64" for column in RUL_FEATURE_COLS}
+    train_df = train_df.copy().astype(feature_dtypes)
     scaler.fit(train_df[RUL_FEATURE_COLS])
     train_df.loc[:, RUL_FEATURE_COLS] = scaler.transform(train_df[RUL_FEATURE_COLS])
 
     transformed = []
     for df in other_dfs:
-        transformed_df = df.copy()
+        transformed_df = df.copy().astype(feature_dtypes)
         transformed_df.loc[:, RUL_FEATURE_COLS] = scaler.transform(
             transformed_df[RUL_FEATURE_COLS]
         )
         transformed.append(transformed_df)
-    return (train_df, *transformed), scaler
+    return train_df, *transformed, scaler
 
 
 def predict(model, X: np.ndarray) -> np.ndarray:
