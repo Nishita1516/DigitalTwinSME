@@ -6,3 +6,8 @@ SENSOR_COLS = [ 's2', 's3', 's4', 's7', 's8', 's9',
     's17', 's20', 's21']
 
 SEQ_LEN = 30
+
+# The published LSTM was trained on these globally StandardScaler-normalised
+# features. Do not apply ``scale_windows`` (MinMaxScaler) before LSTM inference.
+RUL_FEATURE_COLS = SENSOR_COLS
+LSTM_MODEL_FILENAME = "lstm_model.pt"

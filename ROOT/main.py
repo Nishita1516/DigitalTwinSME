@@ -16,10 +16,8 @@ if __name__ == "__main__":
     from DIGITAL_TWIN.twin_data_prep import (
         split_engines,
         create_sliding_windows,
-        scale_windows,
     )
 
-    from MODELS.train_lstm import train_model
     from MODELS.predict_rul import load_model, predict_rul
     from MODELS.shap_explainer import get_shap_explainer, explain_prediction
     from DASHBOARD.app import prepare_dashboard_payload
@@ -28,9 +26,11 @@ if __name__ == "__main__":
     from DIGITAL_TWIN.config import SENSOR_COLS, SEQ_LEN
 
     # STEP 1
-    fd001 = load_fd001(
-        "Sensor Data/NASA C-MAPSS 1 Turbofan Engine Degradation Dataset/train_FD001.txt"
+    data_path = os.path.join(
+        ROOT_DIR, "DATA",
+        "Sensor Data", "NASA C-MAPSS 1 Turbofan Engine Degradation Dataset", "train_FD001.txt"
     )
+    fd001 = load_fd001(data_path)
 
     # STEP 2
     fd001 = add_rul(fd001)
@@ -38,13 +38,13 @@ if __name__ == "__main__":
 
     # STEP 3
     df_twin = generate_digital_twins(fd001)
-    out_path = os.path.join(ROOT_DIR, "FD001_Synthetic_Digital_Twin_Dataset.csv")
+    out_path = os.path.join(ROOT_DIR, "DATA", "FD001_Synthetic_Digital_Twin_Dataset.csv")
     df_twin.to_csv(out_path, index=False)
 
     # STEP 4
     train_fd001, val_fd001, test_fd001 = split_engines(fd001)
 
-    FEATURE_COLS = [c for c in fd001.columns if c.startswith("s")]
+    FEATURE_COLS = SENSOR_COLS
     WINDOW_SIZE = 30
     TARGET = "RUL"
 
@@ -58,8 +58,6 @@ if __name__ == "__main__":
         test_fd001, WINDOW_SIZE, FEATURE_COLS, TARGET
     )
 
-    X_train, X_val, X_test = scale_windows(X_train, X_val, X_test)
-
     print("FD001 Digital Twin pipeline executed successfully")
 
     # DASHBOARD FINAL
@@ -71,27 +69,21 @@ if __name__ == "__main__":
         target_col="RUL",
     )
 
-    # 2. Train LSTM model
-    train_model(
-        X_train=X,
-        y_train=y,
-        input_size=len(SENSOR_COLS),
-    )
-
-    # 3. Load trained model
+    # 2. Load the published checkpoint. Training is a separate, explicit
+    # experiment and must not overwrite the evaluation/dashboard artifact.
     model = load_model(input_size=len(SENSOR_COLS))
 
-    # 4. Predict RUL for one engine sample
+    # 3. Predict RUL for one engine sample
     predicted_rul = predict_rul(model, X[0])
 
-    # 5. Explain prediction using SHAP
+    # 4. Explain prediction using SHAP
     explainer = get_shap_explainer(model, X)
     shap_values = explain_prediction(explainer, X[0])
     shap_array = np.array(shap_values)
     importance = np.mean(np.abs(shap_array), axis=(0, 1))
     importance = importance.ravel()  # Flatten to 1D array
 
-    # 6. Prepare dashboard data
+    # 5. Prepare dashboard data
     dashboard_output = prepare_dashboard_payload(
         engine_id=1,
         predicted_rul=predicted_rul,
@@ -102,7 +94,7 @@ if __name__ == "__main__":
     assert importance.ndim == 1
     assert importance.shape[0] == len(SENSOR_COLS)
 
-    from EVALUATION.metrics import compute_metrics
+    from EVALUATION.metrics import compute_metrics, compute_classification_metrics
     from MODELS.predict_rul import evaluate_model
 
     # Here you should build a DataLoader over (X_test, y_test); placeholder:
@@ -114,3 +106,10 @@ if __name__ == "__main__":
 
     print("MAE:", mae)
     print("RMSE:", rmse)
+
+    # Calculate and print classification metrics (threshold = 30 cycles)
+    accuracy, precision, recall, f1 = compute_classification_metrics(y_true, y_pred, threshold=30)
+    print("Accuracy (RUL <= 30):", accuracy)
+    print("Precision:", precision)
+    print("Recall:", recall)
+    print("F1 Score:", f1)

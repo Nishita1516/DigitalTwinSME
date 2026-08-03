@@ -6,7 +6,18 @@ from torch.utils.data import DataLoader, TensorDataset
 
 from MODELS.lstm_model import LSTMModel
 
-def train_model(X_train, y_train, input_size, epochs=30):
+def train_model(X_train, y_train, input_size, epochs=30, model_path=None, seed=42):
+    """Train on StandardScaler-normalised SENSOR_COLS windows.
+
+    ``model_path`` is deliberately required to persist a new experiment. Keep
+    its checkpoint separate from ``MODELS/lstm_model.pt`` unless it has passed
+    the recorded evaluation protocol.
+    """
+    torch.manual_seed(seed)
+    if torch.cuda.is_available():
+        torch.cuda.manual_seed_all(seed)
+        torch.backends.cudnn.deterministic = True
+        torch.backends.cudnn.benchmark = False
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
     model = LSTMModel(input_size=input_size).to(device)
@@ -18,7 +29,8 @@ def train_model(X_train, y_train, input_size, epochs=30):
         torch.tensor(y_train, dtype=torch.float32)
     )
 
-    loader = DataLoader(dataset, batch_size=64, shuffle=True)
+    generator = torch.Generator().manual_seed(seed)
+    loader = DataLoader(dataset, batch_size=64, shuffle=True, generator=generator)
 
     for epoch in range(epochs):
         model.train()
@@ -38,9 +50,9 @@ def train_model(X_train, y_train, input_size, epochs=30):
 
         print(f"Epoch {epoch+1}/{epochs} | Loss: {total_loss:.4f}")
 
-    # Save model weights next to this file
-    models_dir = os.path.dirname(os.path.abspath(__file__))
-    model_path = os.path.join(models_dir, "lstm_rul_model.pt")
-    torch.save(model.state_dict(), model_path)
+    # Saving is explicit: evaluation/dashboard execution must never replace a
+    # published checkpoint as a side effect.
+    if model_path is not None:
+        torch.save(model.state_dict(), model_path)
 
     return model

@@ -3,13 +3,16 @@ import os
 import torch
 
 from MODELS.lstm_model import LSTMModel
+from DIGITAL_TWIN.config import LSTM_MODEL_FILENAME
 
 
-def load_model(input_size):
+def load_model(input_size, model_filename=LSTM_MODEL_FILENAME):
     model = LSTMModel(input_size=input_size)
     models_dir = os.path.dirname(os.path.abspath(__file__))
-    model_path = os.path.join(models_dir, "lstm_rul_model.pt")
-    model.load_state_dict(torch.load(model_path))
+    model_path = os.path.join(models_dir, model_filename)
+    if not os.path.exists(model_path):
+        raise FileNotFoundError(f"LSTM checkpoint not found: {model_path}")
+    model.load_state_dict(torch.load(model_path, map_location="cpu", weights_only=True))
     model.eval()
     return model
 
